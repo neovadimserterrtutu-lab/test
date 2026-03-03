@@ -1,0 +1,8 @@
+<form>
+    <input type="text" id="ip" placeholder="Введите IP">
+    <button id="btn_ip">Определить город</button>
+</form>
+
+<div id="result_ip"></div>
+
+<script src="ajax_rest.js"></script>
