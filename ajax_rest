@@ -1,0 +1,66 @@
+// Ждем полной загрузки DOM
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Кнопка отправки запроса
+    const btn = document.getElementById("btn_ip");
+
+    if (!btn) return;
+
+    btn.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        // Получаем IP из поля формы
+        const ip = document.getElementById("ip").value.trim();
+
+        if (!ip) {
+            alert("Введите IP");
+            return;
+        }
+
+        // Токен Dadata (ваш токен из личного кабинета)
+        const token = "ea611ad83f3aaeca0fd2a33fb82a717f11b94790";
+
+        // Отправка запроса к Dadata
+        fetch("https://suggestions.dadata.ru/suggestions/api/4_1/rs/iplocate/address", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": "Token " + token
+            },
+            body: JSON.stringify({
+                ip: ip
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            console.log("Ответ Dadata:", data);
+
+            // Проверка наличия данных
+            if (data && data.location && data.location.data) {
+
+                const city = data.location.data.city || "Город не определён";
+
+                // Вывод города в консоль
+                console.log("Город:", city);
+
+                // Дополнительное задание (*) — вывод на страницу
+                const resultBlock = document.getElementById("result_ip");
+                if (resultBlock) {
+                    resultBlock.innerHTML = "Ваш город: <strong>" + city + "</strong>";
+                }
+
+            } else {
+                alert("Не удалось получить данные по IP");
+            }
+        })
+        .catch(error => {
+            console.error("Ошибка:", error);
+            alert("Произошла ошибка запроса");
+        });
+
+    });
+
+});
