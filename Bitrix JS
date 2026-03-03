@@ -1,9 +1,3 @@
-Вот готовый файл с добавленными комментариями.
-Комментарии оформлены в соответствии с языком блока (PHP, JS, HTML).
-
----
-
-```php
 <?
 // Подключаем пролог ядра Bitrix (инициализация системы)
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
@@ -149,4 +143,3 @@ if(isset($_REQUEST['ajax_form']) && $_REQUEST['ajax_form'] == $sidAjax){
 // Подключаем эпилог ядра Bitrix (завершение страницы)
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
-```
